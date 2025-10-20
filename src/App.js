@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -12,26 +12,28 @@ import Notes from "./components/Notes";
 function AppWrapper() {
   const location = useLocation();
 
-  // Show Navbar on all pages except Journey
-  const showNavbar = location.pathname !== "/journey";
+  // Hide Navbar on /journey and /notes
+  const showNavbar = !["/journey", "/notes"].includes(location.pathname);
 
   return (
     <>
       {showNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/" element={
-          <>
-            <Hero />
-            <About />
-            <Projects />
-            <Skills />
-          </>
-        } />
-
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero />
+              <About />
+              <Projects />
+              <Skills />
+            </>
+          }
+        />
         <Route path="/journey" element={<Journey />} />
+        <Route path="/notes" element={<Notes />} />
       </Routes>
-       <Route path="/notes" element={<Notes />} />
     </>
   );
 }
