@@ -13,7 +13,7 @@ function AppWrapper() {
   const location = useLocation();
 
   // Hide Navbar on /journey and /notes
-  const showNavbar = !["/journey", "/notes"].includes(location.hash);
+  const showNavbar = !["#/journey", "#/notes"].includes(location.hash);
 
   return (
     <>
